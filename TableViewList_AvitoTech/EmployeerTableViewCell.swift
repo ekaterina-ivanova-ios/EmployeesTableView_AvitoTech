@@ -2,13 +2,15 @@
 import UIKit
 
 final class EmployeesTableViewCell: UITableViewCell {
+  
+    let randomStringNumber = String(Int.random(in: 1...3))
     
     var employees: DataEmployeesModel? {
         didSet {
             guard let employeesItem = employees else {return}
             
             if let nameEmployee = employeesItem.nameEmployees {
-                profileImageView.image = UIImage(named: "1")
+                profileImageView.image = UIImage(named: randomStringNumber)
                 nameEmployeeLabel.text = nameEmployee
             }
             if let nameCompany = employeesItem.nameCompany {
@@ -18,7 +20,8 @@ final class EmployeesTableViewCell: UITableViewCell {
                 phoneLabel.text = phone
             }
             if let skills = employeesItem.skillsEmployees {
-                skillsLabel.text = skills[0] + "," + skills[1]
+                let stringSkills = skills.joined(separator: ", ")
+                skillsLabel.text = " " + stringSkills + " "
             }
         }
     }
@@ -40,12 +43,12 @@ final class EmployeesTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let nameCompanyLabel: UILabel = {
+    private let skillsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 14)
         label.textColor =  .white
         label.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-        label.layer.cornerRadius = 5
+        label.layer.cornerRadius = 3
         label.clipsToBounds = true
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -53,16 +56,16 @@ final class EmployeesTableViewCell: UITableViewCell {
  
     private let phoneLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    private let skillsLabel: UILabel = {
+    private let nameCompanyLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
-        label.textColor = .black
+        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .systemGray
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -83,6 +86,7 @@ final class EmployeesTableViewCell: UITableViewCell {
         containerView.addSubview(nameEmployeeLabel)
         containerView.addSubview(nameCompanyLabel)
         containerView.addSubview(skillsLabel)
+        containerView.addSubview(phoneLabel)
         self.contentView.addSubview(containerView)
 
         settingCell()
@@ -108,21 +112,19 @@ final class EmployeesTableViewCell: UITableViewCell {
         
         //настройка имени
         nameEmployeeLabel.topAnchor.constraint(equalTo:self.containerView.topAnchor).isActive = true
-        nameEmployeeLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+        nameEmployeeLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor, constant: 10).isActive = true
         nameEmployeeLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
         
         //настройка плашки название компании
-        nameCompanyLabel.topAnchor.constraint(equalTo:self.nameCompanyLabel.bottomAnchor).isActive = true
-        nameCompanyLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
+        nameCompanyLabel.bottomAnchor.constraint(equalTo:self.containerView.bottomAnchor).isActive = true
+        nameCompanyLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant: -10).isActive = true
         
         //настройка плашки скилы
         skillsLabel.bottomAnchor.constraint(equalTo:self.containerView.bottomAnchor).isActive = true
-        skillsLabel.leadingAnchor.constraint(equalTo:self.nameCompanyLabel.leadingAnchor, constant: 10).isActive = true
-        skillsLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant: -10).isActive = true
+        skillsLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
         
         //настройка плашки номер
         phoneLabel.topAnchor.constraint(equalTo:self.containerView.topAnchor).isActive = true
-        phoneLabel.leadingAnchor.constraint(equalTo:self.nameEmployeeLabel.leadingAnchor,constant: 10).isActive = true
         phoneLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant: -10).isActive = true
 
     }

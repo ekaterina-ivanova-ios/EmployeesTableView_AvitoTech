@@ -68,10 +68,10 @@
 				1FDF112E2902AC4600D5B3A7 /* SceneDelegate.swift */,
 				1FDF11302902AC4600D5B3A7 /* EmployeerViewController.swift */,
 				1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCell.swift */,
+				1FDF114629057D1800D5B3A7 /* AlertCreator.swift */,
 				1FDF11352902AC4700D5B3A7 /* Assets.xcassets */,
 				1FDF11372902AC4700D5B3A7 /* LaunchScreen.storyboard */,
 				1FDF113A2902AC4700D5B3A7 /* Info.plist */,
-				1FDF114629057D1800D5B3A7 /* AlertCreator.swift */,
 			);
 			path = TableViewList_AvitoTech;
 			sourceTree = "<group>";
@@ -297,7 +297,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -331,7 +330,6 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

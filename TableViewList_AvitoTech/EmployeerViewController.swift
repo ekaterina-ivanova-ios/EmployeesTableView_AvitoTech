@@ -1,7 +1,7 @@
 
 import UIKit
 
-class EmployeerViewController: UIViewController {
+final class EmployeerViewController: UIViewController {
     
     //private let employees = DataAPI.getEmployeesList()
     private let employees = DataAPI.getEmployeesList()
@@ -12,19 +12,24 @@ class EmployeerViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(employeesTableView)
         
-        //setting table
+        employeesTableView.delegate = self
+        employeesTableView.dataSource = self
+        
+        settingTableView()
+        
+        employeesTableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: "employeeCell")
+        navigationItem.title = "EmployeesList"
+    }
+    
+    private func settingTableView() {
         employeesTableView.translatesAutoresizingMaskIntoConstraints = false
         employeesTableView.topAnchor.constraint(equalTo:view.safeAreaLayoutGuide.topAnchor).isActive = true
         employeesTableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         employeesTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         employeesTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
-        employeesTableView.delegate = self
-        employeesTableView.dataSource = self
-        
-        employeesTableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: "employeeCell")
-        navigationItem.title = "EmployeesList"
+
     }
+    
 }
 
 //MARK: add extension for uitableview
