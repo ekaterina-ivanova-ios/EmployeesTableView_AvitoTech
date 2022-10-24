@@ -5,9 +5,9 @@ final class EmployeesTableViewCell: UITableViewCell {
   
     let randomStringNumber = String(Int.random(in: 1...3))
     
-    var employees: DataEmployeesModel? {
+    var employeesCell: DataEmployeesModel? {
         didSet {
-            guard let employeesItem = employees else {return}
+            guard let employeesItem = employeesCell else {return}
             
             if let nameEmployee = employeesItem.nameEmployees {
                 profileImageView.image = UIImage(named: randomStringNumber)
