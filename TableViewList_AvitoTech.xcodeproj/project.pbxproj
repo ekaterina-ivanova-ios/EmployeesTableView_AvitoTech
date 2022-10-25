@@ -13,10 +13,10 @@
 		1FDF11362902AC4700D5B3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FDF11352902AC4700D5B3A7 /* Assets.xcassets */; };
 		1FDF11392902AC4700D5B3A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FDF11372902AC4700D5B3A7 /* LaunchScreen.storyboard */; };
 		1FDF11412902AF2F00D5B3A7 /* DataEmployeesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */; };
-		1FDF11432903E76900D5B3A7 /* DataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11422903E76900D5B3A7 /* DataAPI.swift */; };
 		1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift */; };
 		1FDF114729057D1800D5B3A7 /* AlertCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF114629057D1800D5B3A7 /* AlertCreator.swift */; };
 		1FDF114F2906D62D00D5B3A7 /* ResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF114E2906D62D00D5B3A7 /* ResponseDataModel.swift */; };
+		1FDF115329081AA600D5B3A7 /* Cashe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF115229081AA600D5B3A7 /* Cashe.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,10 +28,10 @@
 		1FDF11382902AC4700D5B3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FDF113A2902AC4700D5B3A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEmployeesModel.swift; sourceTree = "<group>"; };
-		1FDF11422903E76900D5B3A7 /* DataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAPI.swift; sourceTree = "<group>"; };
 		1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeerTableViewCellModel.swift; sourceTree = "<group>"; };
 		1FDF114629057D1800D5B3A7 /* AlertCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCreator.swift; sourceTree = "<group>"; };
 		1FDF114E2906D62D00D5B3A7 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
+		1FDF115229081AA600D5B3A7 /* Cashe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cashe.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +64,11 @@
 		1FDF112B2902AC4600D5B3A7 /* TableViewList_AvitoTech */ = {
 			isa = PBXGroup;
 			children = (
+				1FDF11512907138500D5B3A7 /* ErrorWorker */,
 				1FDF1150290711E400D5B3A7 /* Representor */,
 				1FDF114D2906AEAC00D5B3A7 /* DataModel */,
 				1FDF114C2906AE7B00D5B3A7 /* Sources */,
-				1FDF11422903E76900D5B3A7 /* DataAPI.swift */,
-				1FDF114629057D1800D5B3A7 /* AlertCreator.swift */,
+				1FDF115229081AA600D5B3A7 /* Cashe.swift */,
 				1FDF11352902AC4700D5B3A7 /* Assets.xcassets */,
 				1FDF11372902AC4700D5B3A7 /* LaunchScreen.storyboard */,
 				1FDF113A2902AC4700D5B3A7 /* Info.plist */,
@@ -101,6 +101,14 @@
 				1FDF11302902AC4600D5B3A7 /* EmployeerViewController.swift */,
 			);
 			path = Representor;
+			sourceTree = "<group>";
+		};
+		1FDF11512907138500D5B3A7 /* ErrorWorker */ = {
+			isa = PBXGroup;
+			children = (
+				1FDF114629057D1800D5B3A7 /* AlertCreator.swift */,
+			);
+			path = ErrorWorker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,8 +182,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				1FDF11312902AC4600D5B3A7 /* EmployeerViewController.swift in Sources */,
-				1FDF11432903E76900D5B3A7 /* DataAPI.swift in Sources */,
 				1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift in Sources */,
+				1FDF115329081AA600D5B3A7 /* Cashe.swift in Sources */,
 				1FDF11412902AF2F00D5B3A7 /* DataEmployeesModel.swift in Sources */,
 				1FDF112D2902AC4600D5B3A7 /* AppDelegate.swift in Sources */,
 				1FDF112F2902AC4600D5B3A7 /* SceneDelegate.swift in Sources */,

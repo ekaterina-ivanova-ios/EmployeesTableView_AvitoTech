@@ -2,7 +2,7 @@
 import Foundation
 
 // MARK: - Response
-struct Response: Codable {
+class Response: Codable {
     let company: Company
 }
 

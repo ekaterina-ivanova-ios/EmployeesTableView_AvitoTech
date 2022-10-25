@@ -15,6 +15,10 @@ final class EmployeerViewController: UIViewController {
     let session = URLSession.shared
     //создаем экземпляр декодера
     let decoder = JSONDecoder()
+    //создаем переменную для хранения кэша
+    private let cache = NSCache<NSString, Response>()
+    //создаем индикатор загрузки
+    private var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +35,8 @@ final class EmployeerViewController: UIViewController {
         navigationItem.title = "EmployeesList"
         
         //загружаем данные
-        fetchData()
+        //fetchData()
+        
     }
     
     //MARK: setting constraints for table view
@@ -42,6 +47,11 @@ final class EmployeerViewController: UIViewController {
         employeesTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         employeesTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
+    }
+    
+    //MARK: setting UIActivityIndicatorView
+    private func showLoadingIndicator() {
+
     }
     
 }
@@ -68,7 +78,14 @@ extension EmployeerViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: GET data
 extension EmployeerViewController {
     
-    func fetchData() {
+    //func fetchData() {
+    func fetchData(completion: @escaping (Response?) -> Void) {
+
+        if let dataCash = cache.object(forKey: "dataCash") {
+            completion(dataCash)
+            return
+        }
+        
         guard let url = URL(string: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c") else {return}
         
         session.dataTask(with: url) { [weak self] (data, response, error) in
@@ -99,7 +116,9 @@ extension EmployeerViewController {
                 } ?? [])
                 //обновляем вью
                 DispatchQueue.main.async {
+                    guard let dataCash = Response() else {return}
                     self?.employeesTableView.reloadData()
+                    //completion()
                 }
                 
             } else {
