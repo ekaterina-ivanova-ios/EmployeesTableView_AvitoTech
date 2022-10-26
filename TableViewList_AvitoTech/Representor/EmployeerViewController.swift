@@ -15,8 +15,10 @@ final class EmployeerViewController: UIViewController {
     let session = URLSession.shared
     //создаем экземпляр декодера
     let decoder = JSONDecoder()
+    //url
+    let url = URL(string: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c")
     //создаем переменную для хранения кэша
-    private let cache = NSCache<NSString, Response>()
+    private let cache = NSCache<NSString, CommonData>()
     //создаем индикатор загрузки
     private var activityIndicator: UIActivityIndicatorView!
     
@@ -37,6 +39,14 @@ final class EmployeerViewController: UIViewController {
         //загружаем данные
         //fetchData()
         
+        let employeesNetworkService = EmployeesNetworkService(networkManager: NetworkManager())
+        employeesNetworkService.fetchData { res in
+            print(res)
+        }
+
+        
+        
+        
     }
     
     //MARK: setting constraints for table view
@@ -47,11 +57,6 @@ final class EmployeerViewController: UIViewController {
         employeesTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         employeesTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         
-    }
-    
-    //MARK: setting UIActivityIndicatorView
-    private func showLoadingIndicator() {
-
     }
     
 }
@@ -78,27 +83,21 @@ extension EmployeerViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: GET data
 extension EmployeerViewController {
     
-    //func fetchData() {
-    func fetchData(completion: @escaping (Response?) -> Void) {
-
-        if let dataCash = cache.object(forKey: "dataCash") {
-            completion(dataCash)
-            return
-        }
+    func fetchData() {
         
-        guard let url = URL(string: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c") else {return}
+        guard let url = url else {return}
         
         session.dataTask(with: url) { [weak self] (data, response, error) in
             guard let strongSelf = self else {return}
             //проверяем, есть ли ошибка
             if error == nil, let dataNotNil = data {
                 //пытаемся раcпарсить данные из json
-                let responseParse = try? strongSelf.decoder.decode(Response.self, from: dataNotNil)
+                let responseParse = try? strongSelf.decoder.decode(CommonData.self, from: dataNotNil)
                 //unwrap optional type
                 guard let result = responseParse else {return}
                 
                 
-                //конвертируем данные из структуры Response в структуру DataEmployeesModel
+                //конвертируем данные из структуры CommonData в структуру DataEmployeesModel
                 for employee in result.company.employees {
                     let model = DataEmployeesModel(nameCompany: result.company.name,
                                                    nameEmployees: employee.name,
@@ -116,9 +115,7 @@ extension EmployeerViewController {
                 } ?? [])
                 //обновляем вью
                 DispatchQueue.main.async {
-                    guard let dataCash = Response() else {return}
                     self?.employeesTableView.reloadData()
-                    //completion()
                 }
                 
             } else {
@@ -129,3 +126,33 @@ extension EmployeerViewController {
     }
     
 }
+
+//extension EmployeerViewController {
+//
+//    func fetchData(completion: @escaping (CommonData) -> Void) {
+//
+//        guard let url = url else {return}
+//
+//        let request = URLRequest(url: url, cachePolicy: URLRequest.CachePolicy.returnCacheDataElseLoad, timeoutInterval: 60*60)
+//        let dataTask = session.dataTask(with: request) { [weak self] data, response, error in
+//
+//            guard error == nil,
+//                  data != nil,
+//                  let response = response as? HTTPURLResponse,
+//                  response.statusCode == 200,
+//                  let self =  self else {
+//                return
+//            }
+//
+//            guard let data = CommonData(from: <#T##Decoder#>) else {return}
+//
+//            DispatchQueue.main.async {
+//                completion(data)
+//            }
+//
+//
+//        }
+//
+//    }
+//
+//}

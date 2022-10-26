@@ -2,7 +2,7 @@
 import Foundation
 
 // MARK: - Response
-class Response: Codable {
+class CommonData: Codable {
     let company: Company
 }
 
