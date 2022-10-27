@@ -5,9 +5,9 @@ final class EmployeesTableViewCell: UITableViewCell {
   
     let randomStringNumber = String(Int.random(in: 1...3))
     
-    var employees: DataEmployeesModel? {
+    var employeesCell: DataEmployeesModel? {
         didSet {
-            guard let employeesItem = employees else {return}
+            guard let employeesItem = employeesCell else {return}
             
             if let nameEmployee = employeesItem.nameEmployees {
                 profileImageView.image = UIImage(named: randomStringNumber)
@@ -45,7 +45,9 @@ final class EmployeesTableViewCell: UITableViewCell {
     
     private let skillsLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.numberOfLines = 2
+        label.lineBreakMode = .byWordWrapping
+        label.font = UIFont.boldSystemFont(ofSize: 10)
         label.textColor =  .white
         label.backgroundColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
         label.layer.cornerRadius = 3

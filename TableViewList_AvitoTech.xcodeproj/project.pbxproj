@@ -13,9 +13,11 @@
 		1FDF11362902AC4700D5B3A7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1FDF11352902AC4700D5B3A7 /* Assets.xcassets */; };
 		1FDF11392902AC4700D5B3A7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1FDF11372902AC4700D5B3A7 /* LaunchScreen.storyboard */; };
 		1FDF11412902AF2F00D5B3A7 /* DataEmployeesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */; };
-		1FDF11432903E76900D5B3A7 /* DataAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11422903E76900D5B3A7 /* DataAPI.swift */; };
-		1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCell.swift */; };
-		1FDF114729057D1800D5B3A7 /* AlertCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF114629057D1800D5B3A7 /* AlertCreator.swift */; };
+		1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift */; };
+		1FDF114F2906D62D00D5B3A7 /* ResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF114E2906D62D00D5B3A7 /* ResponseDataModel.swift */; };
+		1FDF11582909092E00D5B3A7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11572909092E00D5B3A7 /* NetworkManager.swift */; };
+		1FDF115A2909094400D5B3A7 /* EmployeesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11592909094400D5B3A7 /* EmployeesNetworkService.swift */; };
+		1FDF115C29090B5A00D5B3A7 /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF115B29090B5A00D5B3A7 /* RequestModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,9 +29,11 @@
 		1FDF11382902AC4700D5B3A7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1FDF113A2902AC4700D5B3A7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataEmployeesModel.swift; sourceTree = "<group>"; };
-		1FDF11422903E76900D5B3A7 /* DataAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataAPI.swift; sourceTree = "<group>"; };
-		1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeerTableViewCell.swift; sourceTree = "<group>"; };
-		1FDF114629057D1800D5B3A7 /* AlertCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertCreator.swift; sourceTree = "<group>"; };
+		1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeerTableViewCellModel.swift; sourceTree = "<group>"; };
+		1FDF114E2906D62D00D5B3A7 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
+		1FDF11572909092E00D5B3A7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		1FDF11592909094400D5B3A7 /* EmployeesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeesNetworkService.swift; sourceTree = "<group>"; };
+		1FDF115B29090B5A00D5B3A7 /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,18 +66,52 @@
 		1FDF112B2902AC4600D5B3A7 /* TableViewList_AvitoTech */ = {
 			isa = PBXGroup;
 			children = (
-				1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */,
-				1FDF11422903E76900D5B3A7 /* DataAPI.swift */,
-				1FDF112C2902AC4600D5B3A7 /* AppDelegate.swift */,
-				1FDF112E2902AC4600D5B3A7 /* SceneDelegate.swift */,
-				1FDF11302902AC4600D5B3A7 /* EmployeerViewController.swift */,
-				1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCell.swift */,
-				1FDF114629057D1800D5B3A7 /* AlertCreator.swift */,
+				1FDF11562909091100D5B3A7 /* Network */,
+				1FDF1150290711E400D5B3A7 /* Representor */,
+				1FDF114D2906AEAC00D5B3A7 /* DataModel */,
+				1FDF114C2906AE7B00D5B3A7 /* Sources */,
 				1FDF11352902AC4700D5B3A7 /* Assets.xcassets */,
 				1FDF11372902AC4700D5B3A7 /* LaunchScreen.storyboard */,
 				1FDF113A2902AC4700D5B3A7 /* Info.plist */,
 			);
 			path = TableViewList_AvitoTech;
+			sourceTree = "<group>";
+		};
+		1FDF114C2906AE7B00D5B3A7 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				1FDF112C2902AC4600D5B3A7 /* AppDelegate.swift */,
+				1FDF112E2902AC4600D5B3A7 /* SceneDelegate.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		1FDF114D2906AEAC00D5B3A7 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				1FDF11442903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift */,
+				1FDF114E2906D62D00D5B3A7 /* ResponseDataModel.swift */,
+				1FDF11402902AF2F00D5B3A7 /* DataEmployeesModel.swift */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		1FDF1150290711E400D5B3A7 /* Representor */ = {
+			isa = PBXGroup;
+			children = (
+				1FDF11302902AC4600D5B3A7 /* EmployeerViewController.swift */,
+			);
+			path = Representor;
+			sourceTree = "<group>";
+		};
+		1FDF11562909091100D5B3A7 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1FDF115B29090B5A00D5B3A7 /* RequestModel.swift */,
+				1FDF11572909092E00D5B3A7 /* NetworkManager.swift */,
+				1FDF11592909094400D5B3A7 /* EmployeesNetworkService.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,13 +184,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FDF11582909092E00D5B3A7 /* NetworkManager.swift in Sources */,
 				1FDF11312902AC4600D5B3A7 /* EmployeerViewController.swift in Sources */,
-				1FDF11432903E76900D5B3A7 /* DataAPI.swift in Sources */,
-				1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCell.swift in Sources */,
+				1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift in Sources */,
+				1FDF115A2909094400D5B3A7 /* EmployeesNetworkService.swift in Sources */,
 				1FDF11412902AF2F00D5B3A7 /* DataEmployeesModel.swift in Sources */,
+				1FDF115C29090B5A00D5B3A7 /* RequestModel.swift in Sources */,
 				1FDF112D2902AC4600D5B3A7 /* AppDelegate.swift in Sources */,
 				1FDF112F2902AC4600D5B3A7 /* SceneDelegate.swift in Sources */,
-				1FDF114729057D1800D5B3A7 /* AlertCreator.swift in Sources */,
+				1FDF114F2906D62D00D5B3A7 /* ResponseDataModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
