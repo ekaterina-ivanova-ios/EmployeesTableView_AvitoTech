@@ -12,7 +12,6 @@
 
 * Swift
 * UIKit
-* MVP
 * URLSession
 
 # Внешний вид приложения
