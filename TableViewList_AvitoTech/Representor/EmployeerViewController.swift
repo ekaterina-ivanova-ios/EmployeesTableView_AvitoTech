@@ -160,16 +160,7 @@ extension EmployeerViewController {
                             exit(0)
                         }
                 })
-                let buttonRetry = UIAlertAction(
-                    title: "Retry",
-                    style: .default,
-                    handler: {_ in
-                        DispatchQueue.main.async {
-                            self.viewDidLoad()
-                        }
-                })
                 alertModel.addAction(buttonCancel)
-                alertModel.addAction(buttonRetry)
                 present(alertModel, animated: true, completion: nil)
             case .networkTaskError:
                 let alertModel = UIAlertController(
