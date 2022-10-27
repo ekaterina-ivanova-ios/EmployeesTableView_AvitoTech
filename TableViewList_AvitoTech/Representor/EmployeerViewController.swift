@@ -4,17 +4,22 @@ import UIKit
 final class EmployeerViewController: UIViewController {
     
     //создаем массив с работниками
-    var employees = [DataEmployeesModel]()
+    private var employees = [DataEmployeesModel]()
     //создаем массив с работниками, отсортированный по имени в алфавитном порядке
-    var employeesSorted = [DataEmployeesModel]()
+    private var employeesSorted = [DataEmployeesModel]()
     //создаем тэйбл вью
-    let employeesTableView = UITableView()
+    private let employeesTableView = UITableView()
     //создаем экземпляр сеанса
-    let session = URLSession.shared
+    private let session = URLSession.shared
     //создаем экземпляр декодера
-    let decoder = JSONDecoder()
+    private let decoder = JSONDecoder()
     //создаем индикатор
-    let myActivityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    private let myActivityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
+    //настраиваем статус бар
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +41,13 @@ final class EmployeerViewController: UIViewController {
         
         let employeesNetworkService = EmployeesNetworkService(networkManager: NetworkManager())
         employeesNetworkService.fetchData { [weak self] res in
+            //скрываем индикатор загрузки
             self?.hideActivityIndicator()
             guard let self = self else { return }
             print(res)
             switch res {
             case .success(let value):
-                // здесь достаем данные из value(это ассоциированное значение, в нем передаются данные полученные с сервера)
+                //достаем данные из value
                 for employee in value.company.employees {
                     // преобразуем в подходящую модель
                     let employee = DataEmployeesModel(nameCompany: value.company.name,
@@ -50,7 +56,7 @@ final class EmployeerViewController: UIViewController {
                                                       skillsEmployees: employee.skills)
                     
                     
-                    // добавляем в массив
+                    // добавляем в массив преобразованные данные
                     self.employees.append(employee)
                 }
                 
@@ -61,21 +67,28 @@ final class EmployeerViewController: UIViewController {
                     return firstName < secondName
                 })
                 
-                // обновляем таблицу после того как заполнили наш массив
-                // здесь нужно немного почитать про многопоточность, в кратце этот блок(кложур у fetchData) выполняется не на главном потоке, а любые UI изменения(например обновление таблицы) нужно осуществлять на главном потоке, поэтому мы переведем обновление таблицы на главный поток
+                // обновляем таблицу после того как заполнили массив
                 DispatchQueue.main.async {
                     self.employeesTableView.reloadData()
                 }
+                
             case .failure(let error):
-                // здесь получаем ошибку и можем показать алерт с этой ошибкой
-                print(error)
                 switch error {
                 case .decodeError:
-                    print("decodeError")
+                    DispatchQueue.main.async {
+                        self.showAlert(error: .decodeError)
+                        print("decodeError")
+                    }
                 case .invalidUrl:
-                    print("invalidUrl")
+                    DispatchQueue.main.async {
+                        self.showAlert(error: .invalidUrl)
+                        print("invalidUrl")
+                    }
                 case .networkTaskError:
-                    print("networkTaskError")
+                    DispatchQueue.main.async {
+                        self.showAlert(error: .networkTaskError)
+                        print("networkTaskError")
+                    }
                 }
             }
         }
@@ -84,6 +97,7 @@ final class EmployeerViewController: UIViewController {
     //MARK: setting constraints for table view
     private func showActivityIndicator() {
         myActivityIndicator.center = view.center
+        myActivityIndicator.color = .systemBlue
         myActivityIndicator.hidesWhenStopped = false
         myActivityIndicator.startAnimating()
     }
@@ -102,7 +116,7 @@ final class EmployeerViewController: UIViewController {
         employeesTableView.leadingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         employeesTableView.trailingAnchor.constraint(equalTo:view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         employeesTableView.bottomAnchor.constraint(equalTo:view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        
+        employeesTableView.backgroundColor = .white
     }
     
 }
@@ -116,6 +130,7 @@ extension EmployeerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "employeeCell", for: indexPath) as! EmployeesTableViewCell
         cell.employeesCell = employeesSorted[indexPath.row]
+        cell.backgroundColor = .white
         
         return cell
     }
@@ -123,5 +138,65 @@ extension EmployeerViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+
 }
 
+//MARK: setting alert
+extension EmployeerViewController {
+        func showAlert(error: NetworkError) {
+            switch error {
+            case .invalidUrl, .decodeError:
+                let alertModel = UIAlertController(
+                    title: "Internal error",
+                    message: "Please, reinstall the app",
+                    preferredStyle: .alert)
+                let buttonCancel = UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel,
+                    handler: {_ in
+                        DispatchQueue.main.async {
+                            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                            Thread.sleep(forTimeInterval: 2)
+                            exit(0)
+                        }
+                })
+                let buttonRetry = UIAlertAction(
+                    title: "Retry",
+                    style: .default,
+                    handler: {_ in
+                        DispatchQueue.main.async {
+                            self.viewDidLoad()
+                        }
+                })
+                alertModel.addAction(buttonCancel)
+                alertModel.addAction(buttonRetry)
+                present(alertModel, animated: true, completion: nil)
+            case .networkTaskError:
+                let alertModel = UIAlertController(
+                    title: "No internet connection",
+                    message: "Please, check your internet connection and restart your app",
+                    preferredStyle: .alert)
+                let buttonCancel = UIAlertAction(
+                    title: "Cancel",
+                    style: .cancel,
+                    handler: {_ in
+                        DispatchQueue.main.async {
+                            UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                            Thread.sleep(forTimeInterval: 2)
+                            exit(0)
+                        }
+                })
+                let buttonRetry = UIAlertAction(
+                    title: "Retry",
+                    style: .default,
+                    handler: {_ in
+                        DispatchQueue.main.async {
+                            self.viewDidLoad()
+                        }
+                })
+                alertModel.addAction(buttonCancel)
+                alertModel.addAction(buttonRetry)
+                present(alertModel, animated: true, completion: nil)
+            }
+        }
+}

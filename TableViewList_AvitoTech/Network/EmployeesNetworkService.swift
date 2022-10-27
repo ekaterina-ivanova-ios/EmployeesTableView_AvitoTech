@@ -9,6 +9,8 @@ final class EmployeesNetworkService {
 
         let httpMethod = HttpMethod.get
         let url = "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c"
+        //проверка invalidUrl
+        //let url = ""
         let requestModel = RequestModel(httpMethod: httpMethod, url: url)
         networkManager.fetch(requestModel: requestModel) { result in
             switch result {
@@ -22,7 +24,6 @@ final class EmployeesNetworkService {
                 
             case .failure(let error):
                 completionHandler(.failure(error))
-                
             }
         }
     }
