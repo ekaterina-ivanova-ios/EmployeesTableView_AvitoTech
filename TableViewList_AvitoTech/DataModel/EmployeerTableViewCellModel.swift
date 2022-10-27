@@ -100,32 +100,26 @@ final class EmployeesTableViewCell: UITableViewCell {
     }
     
     private func settingCell() {
-        //настройка аватарки
         profileImageView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true
         profileImageView.leadingAnchor.constraint(equalTo:self.contentView.leadingAnchor, constant:10).isActive = true
         profileImageView.widthAnchor.constraint(equalToConstant:70).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant:70).isActive = true
         
-        //настройка общей плашки
         containerView.centerYAnchor.constraint(equalTo:self.contentView.centerYAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo:self.profileImageView.trailingAnchor, constant:10).isActive = true
         containerView.trailingAnchor.constraint(equalTo:self.contentView.trailingAnchor, constant:-10).isActive = true
         containerView.heightAnchor.constraint(equalToConstant:40).isActive = true
         
-        //настройка имени
         nameEmployeeLabel.topAnchor.constraint(equalTo:self.containerView.topAnchor).isActive = true
         nameEmployeeLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor, constant: 10).isActive = true
         nameEmployeeLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor).isActive = true
-        
-        //настройка плашки название компании
+
         nameCompanyLabel.bottomAnchor.constraint(equalTo:self.containerView.bottomAnchor).isActive = true
         nameCompanyLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant: -10).isActive = true
         
-        //настройка плашки скилы
         skillsLabel.bottomAnchor.constraint(equalTo:self.containerView.bottomAnchor).isActive = true
         skillsLabel.leadingAnchor.constraint(equalTo:self.containerView.leadingAnchor).isActive = true
         
-        //настройка плашки номер
         phoneLabel.topAnchor.constraint(equalTo:self.containerView.topAnchor).isActive = true
         phoneLabel.trailingAnchor.constraint(equalTo:self.containerView.trailingAnchor, constant: -10).isActive = true
 

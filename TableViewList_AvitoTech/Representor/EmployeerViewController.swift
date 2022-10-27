@@ -3,23 +3,16 @@ import UIKit
 
 final class EmployeerViewController: UIViewController {
     
-    //создаем массив с работниками
     private var employees = [DataEmployeesModel]()
-    //создаем массив с работниками, отсортированный по имени в алфавитном порядке
     private var employeesSorted = [DataEmployeesModel]()
-    //создаем тэйбл вью
     private let employeesTableView = UITableView()
-    //создаем экземпляр сеанса
     private let session = URLSession.shared
-    //создаем экземпляр декодера
     private let decoder = JSONDecoder()
-    //создаем индикатор
     private let myActivityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.medium)
-    //настраиваем статус бар
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .darkContent
     }
-    
+    private let cache = Cache<String, [DataEmployeesModel]>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,66 +23,68 @@ final class EmployeerViewController: UIViewController {
         employeesTableView.delegate = self
         employeesTableView.dataSource = self
         
-        //настраиваем тэйбл вью
         settingTableView()
         
-        //настраиваем индикатор
         showActivityIndicator()
         
         employeesTableView.register(EmployeesTableViewCell.self, forCellReuseIdentifier: "employeeCell")
         navigationItem.title = "EmployeesList"
         
         let employeesNetworkService = EmployeesNetworkService(networkManager: NetworkManager())
-        employeesNetworkService.fetchData { [weak self] res in
-            //скрываем индикатор загрузки
-            self?.hideActivityIndicator()
-            guard let self = self else { return }
-            print(res)
-            switch res {
-            case .success(let value):
-                //достаем данные из value
-                for employee in value.company.employees {
-                    // преобразуем в подходящую модель
-                    let employee = DataEmployeesModel(nameCompany: value.company.name,
-                                                      nameEmployees: employee.name,
-                                                      phoneEmployees: employee.phoneNumber,
-                                                      skillsEmployees: employee.skills)
+        
+        if cache.value(forKey: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c") == nil {
+            
+            employeesNetworkService.fetchData { [weak self] res in
+                self?.hideActivityIndicator()
+                guard let self = self else { return }
+                print(res)
+                switch res {
+                case .success(let value):
+                    for employee in value.company.employees {
+                        let employee = DataEmployeesModel(nameCompany: value.company.name,
+                                                          nameEmployees: employee.name,
+                                                          phoneEmployees: employee.phoneNumber,
+                                                          skillsEmployees: employee.skills)
+                        
+                        self.employees.append(employee)
+                    }
                     
+                    self.employeesSorted = (self.employees.sorted {
+                        guard let firstName = $0.nameEmployees else { return false }
+                        guard let secondName = $1.nameEmployees else { return true }
+                        return firstName < secondName
+                    })
                     
-                    // добавляем в массив преобразованные данные
-                    self.employees.append(employee)
-                }
-                
-                //сортируем массив с работниками по именам в алфавитном порядке
-                self.employeesSorted = (self.employees.sorted {
-                    guard let firstName = $0.nameEmployees else { return false }
-                    guard let secondName = $1.nameEmployees else { return true }
-                    return firstName < secondName
-                })
-                
-                // обновляем таблицу после того как заполнили массив
-                DispatchQueue.main.async {
-                    self.employeesTableView.reloadData()
-                }
-                
-            case .failure(let error):
-                switch error {
-                case .decodeError:
+                    self.cache.insert(self.employeesSorted, forKey: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c")
+                    
                     DispatchQueue.main.async {
-                        self.showAlert(error: .decodeError)
-                        print("decodeError")
+                        self.employeesTableView.reloadData()
                     }
-                case .invalidUrl:
-                    DispatchQueue.main.async {
-                        self.showAlert(error: .invalidUrl)
-                        print("invalidUrl")
-                    }
-                case .networkTaskError:
-                    DispatchQueue.main.async {
-                        self.showAlert(error: .networkTaskError)
-                        print("networkTaskError")
+                    
+                case .failure(let error):
+                    switch error {
+                    case .decodeError:
+                        DispatchQueue.main.async {
+                            self.showAlert(error: .decodeError)
+                            print("decodeError")
+                        }
+                    case .invalidUrl:
+                        DispatchQueue.main.async {
+                            self.showAlert(error: .invalidUrl)
+                            print("invalidUrl")
+                        }
+                    case .networkTaskError:
+                        DispatchQueue.main.async {
+                            self.showAlert(error: .networkTaskError)
+                            print("networkTaskError")
+                        }
                     }
                 }
+            }
+        } else {
+            self.employeesSorted = cache.value(forKey: "https://run.mocky.io/v3/1d1cb4ec-73db-4762-8c4b-0b8aa3cecd4c")!
+            DispatchQueue.main.async {
+                self.employeesTableView.reloadData()
             }
         }
     }

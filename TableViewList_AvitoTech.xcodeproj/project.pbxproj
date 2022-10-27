@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1FD8D116290B138200D02B62 /* Cash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD8D115290B138200D02B62 /* Cash.swift */; };
 		1FDF112D2902AC4600D5B3A7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF112C2902AC4600D5B3A7 /* AppDelegate.swift */; };
 		1FDF112F2902AC4600D5B3A7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF112E2902AC4600D5B3A7 /* SceneDelegate.swift */; };
 		1FDF11312902AC4600D5B3A7 /* EmployeerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDF11302902AC4600D5B3A7 /* EmployeerViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1FD8D115290B138200D02B62 /* Cash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cash.swift; sourceTree = "<group>"; };
 		1FDF11292902AC4600D5B3A7 /* TableViewList_AvitoTech.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableViewList_AvitoTech.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1FDF112C2902AC4600D5B3A7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1FDF112E2902AC4600D5B3A7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 		1FDF11562909091100D5B3A7 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				1FD8D115290B138200D02B62 /* Cash.swift */,
 				1FDF115B29090B5A00D5B3A7 /* RequestModel.swift */,
 				1FDF11572909092E00D5B3A7 /* NetworkManager.swift */,
 				1FDF11592909094400D5B3A7 /* EmployeesNetworkService.swift */,
@@ -186,6 +189,7 @@
 			files = (
 				1FDF11582909092E00D5B3A7 /* NetworkManager.swift in Sources */,
 				1FDF11312902AC4600D5B3A7 /* EmployeerViewController.swift in Sources */,
+				1FD8D116290B138200D02B62 /* Cash.swift in Sources */,
 				1FDF11452903E7A100D5B3A7 /* EmployeerTableViewCellModel.swift in Sources */,
 				1FDF115A2909094400D5B3A7 /* EmployeesNetworkService.swift in Sources */,
 				1FDF11412902AF2F00D5B3A7 /* DataEmployeesModel.swift in Sources */,
