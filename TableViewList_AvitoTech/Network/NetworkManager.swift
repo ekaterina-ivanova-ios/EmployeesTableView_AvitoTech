@@ -17,7 +17,7 @@ final class NetworkManager: NetworkManagerProtocol {
         request.httpMethod = requestModel.httpMethod.rawValue
 
         let session = URLSession.shared
-        URLSession.shared.dataTask(with: request) { data, _, error in
+        session.dataTask(with: request) { data, _, error in
             if let data = data {
                     completionHandler(.success(data))
             } else {
